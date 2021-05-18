@@ -60,6 +60,7 @@ const validateUpdateUser = celebrate({
   }).unknown(),
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
+    email: Joi.string().required().custom(validateEmail),
   }),
 });
 
@@ -67,7 +68,7 @@ const validateCreateMovie = celebrate({
   body: Joi.object().keys({
     nameRU: Joi.string().required().min(2).max(200),
     nameEN: Joi.string().required().min(2).max(200),
-    contry: Joi.string().required().min(2).max(200),
+    country: Joi.string().required().min(2).max(200),
     director: Joi.string().required().min(2).max(200),
     duration: Joi.number().required().min(0),
     year: Joi.number().required().min(0).max(2021),

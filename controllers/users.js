@@ -89,7 +89,8 @@ const loginUser = (req, res, next) => {
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : 'dev-key', { expiresIn: '7d' });
       res.send({ token });
     })
-    .catch(() => next(new UnauthorizedError('Неправльный логин или пароль')));
+    .catch(() => next(new UnauthorizedError('Неправильный логин или пароль')));
+
 };
 
 module.exports = {
