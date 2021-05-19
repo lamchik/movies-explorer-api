@@ -27,7 +27,7 @@ const createUser = (req, res, next) => {
   console.log(email, password);
   if (!password) {
     next(new BadRequestError('Пароль не может быть пустым'));
-    return
+    return;
   }
 
   bcrypt.hash(password, 10)
@@ -90,7 +90,6 @@ const loginUser = (req, res, next) => {
       res.send({ token });
     })
     .catch(() => next(new UnauthorizedError('Неправильный логин или пароль')));
-
 };
 
 module.exports = {
