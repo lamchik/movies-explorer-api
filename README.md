@@ -1,3 +1,3 @@
 # movies-explorer-api
 
-бэкэнд приложения
+бэкэнд приложения https://diplom.lamara.nomoredomains.icu
