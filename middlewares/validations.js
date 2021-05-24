@@ -76,6 +76,7 @@ const validateCreateMovie = celebrate({
     image: Joi.string().required().custom(validateURL),
     trailer: Joi.string().required().custom(validateURL),
     thumbnail: Joi.string().required().custom(validateURL),
+    movieId: Joi.number().required().min(1),
   }),
 });
 

@@ -31,6 +31,7 @@ const createMovie = (req, res, next) => {
     nameRU,
     nameEN,
     thumbnail,
+    movieId,
   } = req.body;
   Movie.create({
     owner,
@@ -44,6 +45,7 @@ const createMovie = (req, res, next) => {
     nameRU,
     nameEN,
     thumbnail,
+    movieId,
   })
     .then((movie) => {
       res.send(movie);
@@ -68,6 +70,13 @@ const deleteMovieById = (req, res, next) => {
         Movie.findByIdAndRemove(id)
           .then(() => {
             res.send({ message: 'фильм был вами удален' });
+          })
+          .catch((err) => {
+            if (err.name === 'ValidationError') {
+              next(new BadRequestError('Переданы некорректные данные при удалении фильма'));
+            } else {
+              next(err);
+            }
           });
       } else {
         next(new ForbiddenError('Ошибка'));

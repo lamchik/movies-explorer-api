@@ -6,14 +6,14 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const { createUser, loginUser } = require('./controllers/users');
 const router = require('./routes');
-const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/error-handler');
 const { validateCreateUser, validateLoginUser } = require('./middlewares/validations');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 
 const { PORT = 3000 } = process.env;
+const { DB_HOST } = process.env;
 
-mongoose.connect('mongodb://localhost:27017/diplom', {
+mongoose.connect(DB_HOST, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useFindAndModify: false,
@@ -33,7 +33,6 @@ app.get('/crash-test', () => {
   }, 0);
 });
 
-app.use(auth);
 app.use(router);
 
 app.use(errorLogger);
