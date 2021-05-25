@@ -23,22 +23,7 @@ const validateObjectId = (value, helpers) => {
   return helpers.message('Невалидный id');
 };
 
-const validateGetData = celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().max(300).required(),
-  }).unknown(),
-});
-
-const validateGetMe = celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().max(300).required(),
-  }).unknown(),
-});
-
 const validateIdInParams = celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().max(300).required(),
-  }).unknown(),
   params: Joi.object().keys({
     id: Joi.string().required().custom(validateObjectId),
   }),
@@ -55,9 +40,6 @@ const validateCreateUser = celebrate({
 const validateLoginUser = validateCreateUser;
 
 const validateUpdateUser = celebrate({
-  headers: Joi.object().keys({
-    authorization: Joi.string().max(300).required(),
-  }).unknown(),
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     email: Joi.string().required().custom(validateEmail),
@@ -81,8 +63,6 @@ const validateCreateMovie = celebrate({
 });
 
 module.exports = {
-  validateGetData,
-  validateGetMe,
   validateIdInParams,
   validateCreateUser,
   validateLoginUser,

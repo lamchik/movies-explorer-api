@@ -5,9 +5,9 @@ const {
   createMovie,
   deleteMovieById,
 } = require('../controllers/movies');
-const { validateIdInParams, validateGetData, validateCreateMovie } = require('../middlewares/validations');
+const { validateIdInParams, validateCreateMovie } = require('../middlewares/validations');
 
-router.get('/', auth, validateGetData, getMovies);
+router.get('/', auth, getMovies);
 router.post('/', auth, validateCreateMovie, createMovie);
 router.delete('/:id', auth, validateIdInParams, deleteMovieById);
 
