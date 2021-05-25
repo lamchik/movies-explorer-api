@@ -67,7 +67,7 @@ const deleteMovieById = (req, res, next) => {
       if (movie === null) {
         next(new NotFoundError('Фильм по указанному id не найден'));
       } else if (JSON.stringify(userId) === JSON.stringify(movie.owner)) {
-        Movie.findByIdAndRemove(id)
+        movie.remove({ id })
           .then(() => {
             res.send({ message: 'фильм был вами удален' });
           })
@@ -84,7 +84,7 @@ const deleteMovieById = (req, res, next) => {
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        next(new BadRequestError('Фильм по указанному id не найден'));
+        next(new BadRequestError('Неверный id'));
       } else {
         next(err);
       }
